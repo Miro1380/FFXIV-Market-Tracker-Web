@@ -1,0 +1,13 @@
+html,body {
+    --xiv-gold: #c8a96e;
+    --xiv-gold-dim: #8a6e3e;
+    --xiv-dark: #0d0f14;
+    --xiv-panel: #13161e;
+    --xiv-border: rgba(200, 169, 110, 0.25);
+    --xiv-border-bright: rgba(200, 169, 110, 0.6);
+    --xiv-text: #e8e0d0;
+    --xiv-text-dim: #8a8070;
+    --xiv-up: #4caf7d;
+    --xiv-down: #e05a5a;
+    --xiv-blue: #5b9bd5;
+  }
