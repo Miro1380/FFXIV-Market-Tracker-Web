@@ -6,6 +6,8 @@ const theme = createTheme({
         background: {
             default: '#0d0f14',
             paper: '#13161e',
+            xivGoldDim: '#a08040',
+            xivUp: '#000000',
         },
         primary: {
             main: '#c8a96e',
@@ -22,6 +24,8 @@ const theme = createTheme({
         text: {
             primary: '#e8e0d0',
             secondary: '#8a8070',
+            xivGoldDim: '#a08040',
+            xivGold: '#c8a96e',
         },
         divider: 'rgba(200, 169, 110, 0.25)',
     },

@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 
 function AvgPriceCard({snapshots}) {
-    console.log("AvgPriceCard snapshots: ",);
+    //console.log("AvgPriceCard snapshots: ",);
 
     if(!snapshots || snapshots.length === 0) return null;
     
@@ -17,9 +17,9 @@ function AvgPriceCard({snapshots}) {
     return (
         
 
-        <Card sx={{background: 'background.paper', minWidth: 180}}>
+        <Card sx={{background: 'background.paper', minWidth: 180, flex: 1}}>
             <CardContent>
-                <Typography variant="caption" color="text.secondary" gutterBottom>
+                <Typography variant="caption" sx={{color:"text.xivGoldDim"}} gutterBottom>
                     Average Price
                 </Typography>
                 <Typography variant ="h5" color="primary">

@@ -2,27 +2,27 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-function MinListedCard({snapshots}) {
-    //console.log("MINLISTEDCARD snapshots: ",snapshots);
-    //console.log("ZERO ELEM:", snapshots[0]);
+function ListingCard({snapshots}){
+    console.log("SNAP FROM LISTING COMP:", snapshots);
 
     if(!snapshots || snapshots.length === 0) return null;
 
     return(
         <Card sx={{ flex: 1, backgroundColor: '#13161e' }}>
             <CardContent>
-                <Typography variant="caption" sx={{color:"text.xivGoldDim"}} gutterBottom>
-                    Minimum Listed Price
+                <Typography variant="caption" sx={{color:"text.xivGoldDim"}}>
+                    Listings
                 </Typography>
-                <Typography variant="h5" color="primary">
-                    {snapshots[0].minPrice?.toLocaleString()} g
+                <Typography variant="h5" sx={{color:"text.xivGold"}}>
+                    {snapshots[0]?.listingCount.toLocaleString()}
                 </Typography>
                 <Typography variant="caption" color="textSecondary">
-                    Lowest listing
+                    Active Offers
                 </Typography>
             </CardContent>
         </Card>
     )
+
 }
 
-export default MinListedCard;
+export default ListingCard;

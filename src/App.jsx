@@ -6,9 +6,7 @@ import SeedItem from './component/SeedItem.jsx'
 import Header from './component/Header.jsx'
 import Sidebar from './component/Sidebar.jsx';
 import SnapshotTable from './component/SnapshotTable.jsx'
-import AvgPriceCard from './component/AvgPriceCard.jsx'
-import MinListedCard from './component/MinListedCard.jsx'
-
+import StatCardRow from './component/StatCardRow.jsx';
 function App() {
 
   const [trackedItems, setTrackedItems] = useState([]);
@@ -27,7 +25,7 @@ function App() {
       .catch( (error) => { console.error('fetch error:', error)});
   }, []);
 
-  //TODO: fetch snapshots for selected item and update snapshots state.
+  //FETCH snapshots for selected item and update snapshots state.
     useEffect( () =>{
       if(!selectedId) return;
 
@@ -37,17 +35,19 @@ function App() {
 
       if(!selected) return;
 
-      fetch(`/api/market/${selected.itemId}/${selected.world}/history`)
+      //console.log('Selected item for snapshot fetch:', selected);
+
+      fetch(`/api/market/snapshot/${selected.itemId}/${selected.world}`,
+        {method:'POST'}
+      )
+      .then( () => fetch(`/api/market/${selected.itemId}/${selected.world}/history`))
       .then( response => response.json())
       .then(data => {
         console.log('Snapshot data', data);
         setSnapshots(data);
       }).catch( (error) => { console.error('fetch error:', error)});
 
-    }, [selectedId],
-        console.log("Tracked Items: ", trackedItems)
-
-  );
+    }, [selectedId]);
 
 
   const handleToggle = (id) => {
@@ -89,8 +89,8 @@ function App() {
           />
         </div>
         <div className='main'>
-        <AvgPriceCard snapshots={snapshots}/>
-        <MinListedCard snapshots={snapshots}/>
+        <StatCardRow snapshots={snapshots}></StatCardRow>
+
         <SnapshotTable snapshots={snapshots}/>  
 
         </div>
