@@ -10,6 +10,9 @@ import StatCardRow from './component/StatCardRow.jsx'
 import DataGraph from './component/DataGraph.jsx'
 import MinMaxGraph from './component/MinMaxGraph.jsx'
 import NqHqGraph from './component/NqHqGraph.jsx'
+import GraphCard from './component/GraphCard.jsx'
+import SelectedInfoCard from './component/SelectedInfoCard.jsx'
+import MainInfo from './component/MainInfo.jsx'
 
 function App() {
 
@@ -93,13 +96,7 @@ function App() {
           />
         </div>
         <div className='main'>
-          <DataGraph snapshots={snapshots}/>
-          <MinMaxGraph snapshots={snapshots}/>
-          <NqHqGraph snapshots={snapshots}/>
-          <StatCardRow snapshots={snapshots}></StatCardRow>
-
-          <SnapshotTable snapshots={snapshots} />
-
+          <MainInfo item={trackedItems.find(item => item.id === selectedId )} snapshots={snapshots}></MainInfo>
         </div>
 
 

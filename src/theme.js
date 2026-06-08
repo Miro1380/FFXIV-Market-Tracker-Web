@@ -11,6 +11,8 @@ const theme = createTheme({
         },
         primary: {
             main: '#c8a96e',
+            xivGoldDim: { main: '#a08040' },
+            xivGold: { main: '#c8a96e' },
         },
         secondary: {
             main: '#5b9bd5',
@@ -28,6 +30,10 @@ const theme = createTheme({
             xivGold: '#c8a96e',
         },
         divider: 'rgba(200, 169, 110, 0.25)',
+        border: {
+            xivGoldDim: '#a08040',
+            xivGold: '#c8a96e',
+        },
     },
     typography: {
         fontFamily: 'Lato, sans-serif',

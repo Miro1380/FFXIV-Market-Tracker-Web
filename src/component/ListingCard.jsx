@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 function ListingCard({snapshots}){
-    console.log("SNAP FROM LISTING COMP:", snapshots);
+    //console.log("SNAP FROM LISTING COMP:", snapshots);
 
     if(!snapshots || snapshots.length === 0) return null;
 

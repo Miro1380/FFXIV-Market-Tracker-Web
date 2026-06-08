@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 
 function StatCardRow({snapshots}){
     return(
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={2} sx={{mb:1}}>
         
                 <AvgPriceCard snapshots={snapshots}/>
                 <MinListedCard snapshots={snapshots}/>

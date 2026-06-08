@@ -12,16 +12,23 @@ function NqHqGraph({ snapshots }) {
 
     if (!snapshots || snapshots.length === 0) return null;
 
+    const sorted = [...snapshots].reverse();
+
+
+    console.log('series data:', sorted.map(s => Math.round(s.avgPriceNq)));
+    console.log('series data:', sorted.map(s => Math.round(s.avgPriceHq)));
+    console.log('x data:', sorted.map(s => new Date(s.capturedAt)));
+    
     return (
         <Box>
             <ChartsDataProvider
                 height={300}
                 series={[
-                    { type: 'line', data: snapshots.map(s => Math.round(s.avgPriceNq)), label: 'NQ Avg', showMark: true, markSize:2, color: '#c8a96e' },
-                    { type: 'line', data: snapshots.map(s => Math.round(s.avgPriceHq)), label: 'HQ Avg', showMark: true, markSize:2, color: '#7eb8f7' }
+                    { type: 'line', data: sorted.map(s => Math.round(s.avgPriceNq)), label: 'NQ Avg', showMark: false, color: '#c8a96e' },
+                    { type: 'line', data: sorted.map(s => Math.round(s.avgPriceHq)), label: 'HQ Avg', showMark: false, color: '#7eb8f7' }
                 ]}
                 xAxis={[{ 
-                    data: snapshots.map(s => new Date(s.capturedAt)), 
+                    data: sorted.map(s => new Date(s.capturedAt)), 
                     scaleType: 'time',
                     tickMinStep: 3600 * 1000 * 6,
                     valueFormatter: (date) => date.toLocaleDateString([], { month: 'short', day: 'numeric' }) 
