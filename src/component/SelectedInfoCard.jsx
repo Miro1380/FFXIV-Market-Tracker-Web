@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 
 
-function SelectedInfoCard({ item }) {
+function SelectedInfoCard({ item , onRefresh}) {
     console.log("SelectedInfoCard item:", item);
 
     if (!item || item.length === 0) return null;
@@ -48,7 +48,7 @@ function SelectedInfoCard({ item }) {
                 </Typography>
             </Stack>
             <Stack direction="row" spacing={1}   sx={{ mb: 2 }}>
-                <Chip label="Refresh" variant="filled" size="small" sx={{ color: '#c8a96e',   borderRadius:0.5, borderColor: '#a08040', p:1 }} />
+                <Chip label="Refresh" variant="filled" size="small" sx={{ color: '#c8a96e',   borderRadius:0.5, borderColor: '#a08040', p:1 }} onClick={onRefresh} />
                 <Chip label="Set Alert" variant="outlined" size="small" sx={{ color: '#c8a96e', borderRadius:0.5, borderColor: '#a08040', p:1 }} />
             </Stack>
         </Stack>

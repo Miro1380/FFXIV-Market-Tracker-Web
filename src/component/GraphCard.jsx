@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 
 function GraphCard({ snapshots }) {
 
+    if(!snapshots || snapshots.length === 0) return null;
+    
     const [selectedGraph, setSelectedGraph] = useState('avg');
 
     const handleGraphSelect = (event, newGraph) => {

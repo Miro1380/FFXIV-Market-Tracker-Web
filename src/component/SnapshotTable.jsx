@@ -10,9 +10,7 @@ import SnapshotRow from "./SnapshotRow";
 
 function SnapshotTable({ snapshots }) {
 
-    if (!snapshots || snapshots.length === 0) {
-        return <p> Select an item from the sidebar to view price history and snapshots. </p>
-    }
+    if (!snapshots || snapshots.length === 0) { return null;}
     return (
         <div>
             <TableContainer component={Paper} sx={{ maxHeight: 400, textAlign: 'center', backgroundColor: '#13161e', borderRadius: 1, mx:'auto', mt:2}}>

@@ -5,14 +5,8 @@ import './App.css'
 import SeedItem from './component/SeedItem.jsx'
 import Header from './component/Header.jsx'
 import Sidebar from './component/Sidebar.jsx'
-import SnapshotTable from './component/SnapshotTable.jsx'
-import StatCardRow from './component/StatCardRow.jsx'
-import DataGraph from './component/DataGraph.jsx'
-import MinMaxGraph from './component/MinMaxGraph.jsx'
-import NqHqGraph from './component/NqHqGraph.jsx'
-import GraphCard from './component/GraphCard.jsx'
-import SelectedInfoCard from './component/SelectedInfoCard.jsx'
 import MainInfo from './component/MainInfo.jsx'
+import Typography from '@mui/material/Typography'
 
 function App() {
 
@@ -26,24 +20,16 @@ function App() {
     fetch('/api/tracked/user/1')
       .then(res => res.json())
       .then(data => {
-        console.log('tracked items:', data);
+        //console.log('tracked items:', data);
         setTrackedItems(data)
       })
       .catch((error) => { console.error('fetch error:', error) });
   }, []);
 
-  //FETCH snapshots for selected item and update snapshots state.
-  useEffect(() => {
-    if (!selectedId) return;
+  //Find selected item for dependency array
+  const selected = trackedItems.find(item => item.id === selectedId);
 
-    //Get selected item from tracked items state using selectedId. 
-    //If no item is found, return early to avoid making an unnecessary API call.
-    const selected = trackedItems.find(item => item.id === selectedId);
-
-    if (!selected) return;
-
-    //console.log('Selected item for snapshot fetch:', selected);
-
+  const fetchSnapshots = (selected) => {
     fetch(`/api/market/snapshot/${selected.itemId}/${selected.world}`,
       { method: 'POST' }
     )
@@ -53,10 +39,22 @@ function App() {
         console.log('Snapshot data', data);
         setSnapshots(data);
       }).catch((error) => { console.error('fetch error:', error) });
+  }
 
-  }, [selectedId]);
+  //FETCH snapshots for selected item and update snapshots state.
+  useEffect(() => {
+    if (!selectedId) return;
+
+    //Get selected item from tracked items state using selectedId. 
+    //If no item is found, return early to avoid making an unnecessary API call.
+    const selected = trackedItems.find(item => item.id === selectedId);
+
+    if (!selected || !selectedId) return;
+    fetchSnapshots(selected);
+  }, [selectedId, selected]);
 
 
+  //
   const handleToggle = (id) => {
     setTrackedItems(prev =>
       prev.map(item =>
@@ -66,6 +64,8 @@ function App() {
 
   const handleSeed = (newItem) => {
     setTrackedItems(prev => [...prev, newItem]);
+    setSelectedId(newItem.id);
+    fetchSnapshots(newItem);
   };
 
   const handleDelete = (id) => {
@@ -79,6 +79,11 @@ function App() {
     fetch(`/api/tracked/user/1/item/${id}`, { method: 'DELETE' })
       .catch((error) => { console.error('Error deleting element: ', error) });
     console.log('Deleting item with id:', id);
+  }
+
+  const handleRefresh = () => {
+    setSelectedId(null);
+    setTimeout(() => setSelectedId(selectedId), 0);
   }
 
   return (
@@ -96,7 +101,15 @@ function App() {
           />
         </div>
         <div className='main'>
-          <MainInfo item={trackedItems.find(item => item.id === selectedId )} snapshots={snapshots}></MainInfo>
+          {selectedId &&
+            (<MainInfo
+              item={trackedItems.find(item => item.id === selectedId)}
+              snapshots={snapshots}
+              onRefresh={handleRefresh}
+            />)
+          }
+
+          {!selectedId && <Typography variant='caption'> Select an item on the left after seeding to view information.</Typography>}
         </div>
 
 
