@@ -13,6 +13,7 @@ function App() {
   const [trackedItems, setTrackedItems] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [snapshots, setSnapshots] = useState([]);
+  const [alerts, setAlerts] = userState([]);
 
 
   //Gets initial tracked items for user 1. TODO: add user context and fetch based on logged in user.
@@ -39,6 +40,24 @@ function App() {
         console.log('Snapshot data', data);
         setSnapshots(data);
       }).catch((error) => { console.error('fetch error:', error) });
+  }
+
+  //Fetch Alerts for items
+  const fetchAlerts = () => {
+    fetch(`/api/alerts/user/1`)
+    .then(response => response.json())
+    .then(data => console.log("Alerts data: ", data))
+    .catch( (error) => console.log('fetch error in alerts', error))
+  }
+
+  useEffect( ()=>{
+    fetchAlerts();
+  }, [])
+
+  //Delete alerts and update Alert state
+  const handleDeleteAlert = (alertId) => {
+    fetch(`/api/alerts/${alertId}`, {method:'DELETE'})
+    .then( ()=> fetchAlerts);
   }
 
   //FETCH snapshots for selected item and update snapshots state.
@@ -88,7 +107,7 @@ function App() {
 
   return (
     <div id="app">
-      <Header />
+      <Header alerts={alerts} onDeleteAlert={handleDeleteAlert} />
       <div className='layout'>
         <div className='sidebar'>
           <SeedItem onSeed={handleSeed} />

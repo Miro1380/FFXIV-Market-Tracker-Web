@@ -1,5 +1,7 @@
 
-function Header(){
+function Header({alerts, onDeleteAlert}){
+
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
     return(
         <div className='header'>
