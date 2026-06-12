@@ -11,3 +11,8 @@ html,body {
     --xiv-down: #e05a5a;
     --xiv-blue: #5b9bd5;
   }
+
+  html, body, #root {
+    height: 100%;
+    overflow: hidden;
+}

@@ -104,9 +104,9 @@ function App() {
   }
 
   return (
-    <Stack direction={"column"} sx={{ height: "100vh" }}>
+    <Stack direction={"column"} sx={{ height: "100vh", overflow: "hidden" }}>
       <Header alerts={alerts} onDeleteAlert={handleDeleteAlert} />
-      <Stack direction={"row"} sx={{ flex: 1, overflow: "hidden" }}>
+      <Stack direction={"row"} sx={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
         <Stack sx={{ width: 250, borderRight: "1px solid rgba(200, 169, 110, 0.25)", overflow: 'auto', flexShrink: 0 }}>
           <SeedItem onSeed={handleSeed} />
           <Sidebar
@@ -117,7 +117,14 @@ function App() {
             onDelete={handleDelete}
           />
         </Stack>
-        <Box sx={{ display: "flex", flex: 1, alignItems: "center", m: 1, justifyContent: "center", overflow: "auto", p: 2 }}>
+        <Box sx={{
+          display: "flex",
+          flex: 1,
+          alignItems: "flex-start",
+          justifyContent: "center",
+          overflow: "auto",
+          p: 2
+        }}>
           {selectedId &&
             (<MainInfo
               item={trackedItems.find(item => item.id === selectedId)}

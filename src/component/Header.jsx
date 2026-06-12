@@ -12,25 +12,25 @@ function Header({ alerts, onDeleteAlert }) {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (
-        <Stack direction="row" spacing={2} sx={{borderBottom: "solid 1px", borderRadius:0.5, borderColor: "border.xivGoldDark" }} >
-            <Stack direction="row" sx={{ alignContent: "start", padding: 3, color: "text.xivGold" }} spacing={1}>
+        <Stack direction="row" spacing={2} sx={{flexShrink:0, px:2, borderBottom: "solid 1px",borderColor: "border.xivGoldDark" }} >
+            <Stack direction="row" sx={{ alignContent: "start",  color: "text.xivGold" ,pt:1.5 }} spacing={1}>
                 <Stack direction="row">
-                    <Avatar src="" />
+                    <Avatar  src="" />
                 </Stack>
             </Stack>
             <Stack sx={{ alignItems: "center", color: "text.xivGoldDim", flex: 1 }} >
-                <Typography variant="h5" sx={{ pt: 2 }}>
+                <Typography variant="h5" sx={{ mt: 2 }}>
                     Eorzea Market Watch
                 </Typography>
                 <Typography variant="caption">
                     Market Board Tracker
                 </Typography>
             </Stack>
-            <Stack sx={{ alignItems: "center", p: 2}}>
-                <Typography variant="caption">
+            <Stack sx={{ alignItems: "center"}}>
+                <Typography variant="caption" sx={{p:0.5}}>
                     Crystal
                 </Typography>
-                <Button variant="outlined" sx={{ m:0.5}} onClick={() => setDrawerOpen(true)}>
+                <Button variant="outlined" sx={{  mb:1.5}} onClick={() => setDrawerOpen(true)}>
                     Alerts
                 </Button>
                 <Drawer

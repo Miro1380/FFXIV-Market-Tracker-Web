@@ -12,7 +12,7 @@ function MainInfo({item,snapshots, onRefresh, onAlertCreated}){
     return(
 
 
-        <Stack sx={{display:"flex", flex:1, m:2}}>
+        <Stack sx={{width:'100%', m:2}}>
             <SelectedInfoCard item={item} onRefresh={onRefresh} onAlertCreated={onAlertCreated}/>
             <StatCardRow snapshots={snapshots}/>
             <GraphCard snapshots={snapshots}/>
