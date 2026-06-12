@@ -13,6 +13,8 @@ const theme = createTheme({
             main: '#c8a96e',
             xivGoldDim: { main: '#a08040' },
             xivGold: { main: '#c8a96e' },
+            xivGoldDark: 'rgba(200, 169, 110, 0.25)'
+
         },
         secondary: {
             main: '#5b9bd5',
@@ -33,6 +35,7 @@ const theme = createTheme({
         border: {
             xivGoldDim: '#a08040',
             xivGold: '#c8a96e',
+            xivGoldDark: 'rgba(200, 169, 110, 0.25)'
         },
     },
     typography: {

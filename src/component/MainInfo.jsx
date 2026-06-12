@@ -1,10 +1,10 @@
 import GraphCard from "./GraphCard";
 import SelectedInfoCard from "./SelectedInfoCard";
-import Container from "@mui/material/Container";
 import StatCardRow from "./StatCardRow";
 import SnapshotTable from "./SnapshotTable";
+import Stack from "@mui/material/Stack";
 
-function MainInfo({item,snapshots, onRefresh}){
+function MainInfo({item,snapshots, onRefresh, onAlertCreated}){
     
     if(!item || !snapshots || snapshots.length === 0) return null;
     
@@ -12,13 +12,13 @@ function MainInfo({item,snapshots, onRefresh}){
     return(
 
 
-        <Container>
-            <SelectedInfoCard item={item} onRefresh={onRefresh}/>
+        <Stack sx={{display:"flex", flex:1, m:2}}>
+            <SelectedInfoCard item={item} onRefresh={onRefresh} onAlertCreated={onAlertCreated}/>
             <StatCardRow snapshots={snapshots}/>
             <GraphCard snapshots={snapshots}/>
             <SnapshotTable snapshots={snapshots}></SnapshotTable>
 
-        </Container>
+        </Stack>
     )
 }
 

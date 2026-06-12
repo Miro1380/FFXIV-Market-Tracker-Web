@@ -7,13 +7,15 @@ import Header from './component/Header.jsx'
 import Sidebar from './component/Sidebar.jsx'
 import MainInfo from './component/MainInfo.jsx'
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 function App() {
 
   const [trackedItems, setTrackedItems] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [snapshots, setSnapshots] = useState([]);
-  const [alerts, setAlerts] = userState([]);
+  const [alerts, setAlerts] = useState([]);
 
 
   //Gets initial tracked items for user 1. TODO: add user context and fetch based on logged in user.
@@ -26,9 +28,6 @@ function App() {
       })
       .catch((error) => { console.error('fetch error:', error) });
   }, []);
-
-  //Find selected item for dependency array
-  const selected = trackedItems.find(item => item.id === selectedId);
 
   const fetchSnapshots = (selected) => {
     fetch(`/api/market/snapshot/${selected.itemId}/${selected.world}`,
@@ -45,19 +44,19 @@ function App() {
   //Fetch Alerts for items
   const fetchAlerts = () => {
     fetch(`/api/alerts/user/1`)
-    .then(response => response.json())
-    .then(data => console.log("Alerts data: ", data))
-    .catch( (error) => console.log('fetch error in alerts', error))
+      .then(response => response.json())
+      .then(data => setAlerts(data))
+      .catch((error) => console.log('fetch error in alerts', error))
   }
 
-  useEffect( ()=>{
+  useEffect(() => {
     fetchAlerts();
   }, [])
 
   //Delete alerts and update Alert state
   const handleDeleteAlert = (alertId) => {
-    fetch(`/api/alerts/${alertId}`, {method:'DELETE'})
-    .then( ()=> fetchAlerts);
+    fetch(`/api/alerts/${alertId}`, { method: 'DELETE' })
+      .then(() => fetchAlerts());
   }
 
   //FETCH snapshots for selected item and update snapshots state.
@@ -68,12 +67,11 @@ function App() {
     //If no item is found, return early to avoid making an unnecessary API call.
     const selected = trackedItems.find(item => item.id === selectedId);
 
-    if (!selected || !selectedId) return;
+    if (!selected) return;
     fetchSnapshots(selected);
-  }, [selectedId, selected]);
+  }, [selectedId]);
 
 
-  //
   const handleToggle = (id) => {
     setTrackedItems(prev =>
       prev.map(item =>
@@ -106,10 +104,10 @@ function App() {
   }
 
   return (
-    <div id="app">
+    <Stack direction={"column"} sx={{ height: "100vh" }}>
       <Header alerts={alerts} onDeleteAlert={handleDeleteAlert} />
-      <div className='layout'>
-        <div className='sidebar'>
+      <Stack direction={"row"} sx={{ flex: 1, overflow: "hidden" }}>
+        <Stack sx={{ width: 250, borderRight: "1px solid rgba(200, 169, 110, 0.25)", overflow: 'auto', flexShrink: 0 }}>
           <SeedItem onSeed={handleSeed} />
           <Sidebar
             items={trackedItems}
@@ -118,23 +116,26 @@ function App() {
             onToggle={handleToggle}
             onDelete={handleDelete}
           />
-        </div>
-        <div className='main'>
+        </Stack>
+        <Box sx={{ display: "flex", flex: 1, alignItems: "center", m: 1, justifyContent: "center", overflow: "auto", p: 2 }}>
           {selectedId &&
             (<MainInfo
               item={trackedItems.find(item => item.id === selectedId)}
               snapshots={snapshots}
               onRefresh={handleRefresh}
+              onAlertCreated={fetchAlerts}
             />)
           }
 
-          {!selectedId && <Typography variant='caption'> Select an item on the left after seeding to view information.</Typography>}
-        </div>
+          {!selectedId &&
+            <Typography variant='h4'> Select an item on the left after seeding to view information.
+            </Typography>}
+        </Box>
 
 
 
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   )
 }
 
