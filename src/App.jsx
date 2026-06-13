@@ -16,6 +16,7 @@ function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [snapshots, setSnapshots] = useState([]);
   const [alerts, setAlerts] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(false);
 
 
   //Gets initial tracked items for user 1. TODO: add user context and fetch based on logged in user.
@@ -59,17 +60,16 @@ function App() {
       .then(() => fetchAlerts());
   }
 
-  //FETCH snapshots for selected item and update snapshots state.
+  //FETCH snapshots for selected item and update snapshots state. UseEffect 2
   useEffect(() => {
     if (!selectedId) return;
 
     //Get selected item from tracked items state using selectedId. 
     //If no item is found, return early to avoid making an unnecessary API call.
     const selected = trackedItems.find(item => item.id === selectedId);
-
     if (!selected) return;
     fetchSnapshots(selected);
-  }, [selectedId]);
+  }, [selectedId, refreshKey]);
 
 
   const handleToggle = (id) => {
@@ -99,8 +99,7 @@ function App() {
   }
 
   const handleRefresh = () => {
-    setSelectedId(null);
-    setTimeout(() => setSelectedId(selectedId), 0);
+    setRefreshKey(k => !k);
   }
 
   return (
