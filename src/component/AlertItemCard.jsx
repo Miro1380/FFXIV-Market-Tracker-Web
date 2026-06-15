@@ -34,15 +34,15 @@ function AlertItemCard({ alert, onDeleteAlert }) {
                     }
                 </Stack>
                 {alert.alertCondition === "BELOW"
-                        ? <Chip variant="outlined" label="Below" size="small" sx={{ borderColor: "#4caf7d", color: '#4caf7d' }} />
-                        : <Chip variant="outlined" label="Above" size="small" sx={{ borderColor: "#e05a5a", color: '#e05a5a' }} />
-                    }
+                    ? <Chip variant="outlined" label="Below" size="small" sx={{ borderColor: "#4caf7d", color: '#4caf7d' }} />
+                    : <Chip variant="outlined" label="Above" size="small" sx={{ borderColor: "#e05a5a", color: '#e05a5a' }} />
+                }
 
-                {/*target price */}
+                {/* target price */}
                 <Typography variant="body2" sx={{ color: '#c8a96e' }}>
                     {alert.targetPrice.toLocaleString()}g
                 </Typography>
-                
+
                 <IconButton size="small" onClick={() => onDeleteAlert(alert.id)} sx={{ color: '#e05a5a' }}>
                     <DeleteIcon fontSize="small" />
                 </IconButton>
