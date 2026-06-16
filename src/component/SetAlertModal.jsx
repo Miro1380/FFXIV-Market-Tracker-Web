@@ -12,6 +12,7 @@ import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
+import { useUser } from "./UserContext";
 
 //Used claude from design
 export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
@@ -20,6 +21,7 @@ export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
     const [isHq, setIsHq] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const {user} = useUser();
 
     console.log("ITEM in Modal", item);
 
@@ -38,7 +40,7 @@ export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    userId: 1,
+                    userId: user.id,
                     itemId: item.itemId,
                     world: item.world,
                     alertCondition,

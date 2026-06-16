@@ -6,10 +6,13 @@ import Drawer from "@mui/material/Drawer";
 import AlertItemCard from "./AlertItemCard";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useUser } from "./UserContext";
 
 function Header({ alerts, onDeleteAlert }) {
 
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const {user} = useUser();
 
     return (
         <Stack direction="row" spacing={2} sx={{ flexShrink: 0, px: 2, borderBottom: "solid 1px", borderColor: "border.xivGoldDark" }} >
@@ -28,7 +31,7 @@ function Header({ alerts, onDeleteAlert }) {
             </Stack>
             <Stack sx={{ alignItems: "center" }}>
                 <Typography variant="caption" sx={{ p: 0.5 }}>
-                    Crystal
+                    {user.homeWorld}
                 </Typography>
                 <Button variant="outlined" sx={{ mb: 1.5 }} onClick={() => setDrawerOpen(true)}>
                     Alerts

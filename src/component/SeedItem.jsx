@@ -7,13 +7,14 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from 'react'
+import { useUser } from './UserContext';
 
 //TODO:Review component.
 function SeedItem({ onSeed }) {
 
     const [seedId, setSeedId] = useState('');
     const [toast, setToast] = useState({ open: false, message: '', severity: 'info' });
-
+    const {user} = useUser();
 
     const handleClick = async () => {
         if (!seedId) return;
@@ -30,7 +31,7 @@ function SeedItem({ onSeed }) {
             const trackedRes = await fetch('/api/tracked', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId: 1, itemId: item.itemId, world: 'Crystal' })
+                body: JSON.stringify({ userId: user.id, itemId: item.itemId, world: user.homeWorld})
             });
 
             if (trackedRes.status === 200) {

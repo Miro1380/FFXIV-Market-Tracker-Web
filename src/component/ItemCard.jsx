@@ -23,13 +23,13 @@ function ItemCard({ item, isActive, onSelect, onToggle, onDelete }) {
                             checked={item.isTracking}
                             onChange={(e) => { e.stopPropagation(); onToggle(item.id); }}
                         />
-                        <IconButton 
-                            fontSize="small" 
-                            edge="end" 
-                            onClick={(e) => { 
-                                    e.stopPropagation(); 
-                                    onDelete(item.id); 
-                                }}>
+                        <IconButton
+                            fontSize="small"
+                            edge="end"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onDelete(item.id);
+                            }}>
                             <DeleteIcon fontSize="small" />
                         </IconButton>
                     </>
