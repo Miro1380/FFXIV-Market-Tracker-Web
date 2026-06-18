@@ -1,7 +1,7 @@
 import CardContent from "@mui/material/CardContent";
-import DataGraph from "./DataGraph";
-import MinMaxGraph from "./MinMaxGraph";
-import NqHqGraph from "./NqHqGraph";
+import DataGraph from "./graphComponent/DataGraph";
+import MinMaxGraph from "./graphComponent/MinMaxGraph";
+import NqHqGraph from "./graphComponent/NqHqGraph";
 import Card from "@mui/material/Card";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -42,8 +42,6 @@ function GraphCard({ snapshots }) {
                     <ToggleButton value="nqhq">  NQ / HQ </ToggleButton>
 
                 </ToggleButtonGroup>
-
-
                 {selectedGraph === 'avg' && <DataGraph snapshots={snapshots} />}
                 {selectedGraph === 'minmax' && <MinMaxGraph snapshots={snapshots} />}
                 {selectedGraph === 'nqhq' && <NqHqGraph snapshots={snapshots} />}

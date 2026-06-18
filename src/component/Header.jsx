@@ -7,6 +7,7 @@ import AlertItemCard from "./AlertItemCard";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useUser } from "./UserContext";
+import badge from "../assets/badge.png"
 
 function Header({ alerts, onDeleteAlert }) {
 
@@ -15,10 +16,10 @@ function Header({ alerts, onDeleteAlert }) {
     const {user} = useUser();
 
     return (
-        <Stack direction="row" spacing={2} sx={{ flexShrink: 0, px: 2, borderBottom: "solid 1px", borderColor: "border.xivGoldDark" }} >
-            <Stack direction="row" sx={{ alignContent: "start", color: "text.xivGold", pt: 1.5 }} spacing={1}>
+        <Stack direction="row" spacing={2} sx={{ flexShrink: 0, px: 2,borderBottom: "solid 1px", borderColor: "border.xivGoldDark" }} >
+            <Stack direction="row" sx={{ width:"10%", alignContent: "start", color: "text.xivGold", pt: 1.5  }} spacing={1}>
                 <Stack direction="row">
-                    <Avatar src="" />
+                    <Avatar src={badge} sx={{ width:"100%", height:"90%", border:"1px white solid"}} />
                 </Stack>
             </Stack>
             <Stack sx={{ alignItems: "center", color: "text.xivGoldDim", flex: 1 }} >
@@ -29,8 +30,8 @@ function Header({ alerts, onDeleteAlert }) {
                     Market Board Tracker
                 </Typography>
             </Stack>
-            <Stack sx={{ alignItems: "center" }}>
-                <Typography variant="caption" sx={{ p: 0.5 }}>
+            <Stack sx={{ alignItems: "center" ,justifyContent:"center"}}>
+                <Typography variant="caption" sx={{ p: 0.75,m:1.5, boxShadow:'0 0 8px rgb(200,169,110,0.6)', borderRadius:0.5 }}>
                     {user.homeWorld}
                 </Typography>
                 <Button variant="outlined" sx={{ mb: 1.5 }} onClick={() => setDrawerOpen(true)}>

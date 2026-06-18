@@ -35,9 +35,16 @@ export default function UserLogin() {
     };
 
     return (
-        <Box sx={{alignItems:"center", justifyItems:"center" }}>
-            <Stack sx={{p:5, border:"1px solid white", mt:6 }}>
-                <Typography>
+        <Box sx={{
+            height:'100vh',
+            width:"100%",
+            alignItems:"center", 
+            justifyContent:"center",
+            display:"flex",
+            
+            }}>
+            <Stack spacing={2} sx={{p:4 , border:"1px solid white", width:350 }}>
+                <Typography >
                     Eorzea Marketplace Tracker
                 </Typography>
                 <TextField
