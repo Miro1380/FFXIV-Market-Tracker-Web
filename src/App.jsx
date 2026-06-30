@@ -22,7 +22,7 @@ function App() {
 
   const { user } = useUser();
 
-  console.log("User from context: ", user);
+  //console.log("User from context: ", user);
 
 
   //Gets initial tracked items for user 1. TODO: add user context and fetch based on logged in user.
@@ -56,7 +56,7 @@ function App() {
       .then(() => fetch(`/api/market/${selected.itemId}/${selected.world}/history`))
       .then(response => response.json())
       .then(data => {
-        console.log('Snapshot data', data);
+        //console.log('Snapshot data', data);
         setSnapshots(data);
       }).catch((error) => { console.error('fetch error:', error) });
   }
@@ -105,7 +105,7 @@ function App() {
     //Removes selected item from database by id and userId. TODO: change userId to logged in user.
     fetch(`/api/tracked/user/${user.id}/item/${id}`, { method: 'DELETE' })
       .catch((error) => { console.error('Error deleting element: ', error) });
-    console.log('Deleting item with id:', id);
+    //console.log('Deleting item with id:', id);
   }
 
   const handleRefresh = () => {

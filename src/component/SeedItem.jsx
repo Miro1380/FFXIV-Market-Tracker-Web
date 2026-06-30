@@ -23,8 +23,8 @@ function SeedItem({ onSeed }) {
             // seed the item first
             const itemRes = await fetch(`/api/items/seed/${seedId}`, { method: 'POST' });
             const item = await itemRes.json();
-            console.log('item seeded:', item);
-            console.log('itemId: ', item.itemId);
+            //console.log('item seeded:', item);
+            //console.log('itemId: ', item.itemId);
 
 
             // then add it to tracked items
@@ -39,15 +39,15 @@ function SeedItem({ onSeed }) {
                 return;
             }
             const tracked = await trackedRes.json();
-            console.log('tracked result:', tracked);
+            //console.log('tracked result:', tracked);
 
             // tell App to add it to the list
-            console.log('calling onSeed with:', tracked);
+            //console.log('calling onSeed with:', tracked);
             onSeed({ ...tracked, isTracking: tracked.tracking });
             setSeedId('');
             setToast({ open: true, message: 'Item added!', severity: 'success' });
         } catch (err) {
-            console.error('seed error:', err);
+            //console.error('seed error:', err);
             setToast({ open: true, message: 'Something went wrong.', severity: 'error' });
         }
     }

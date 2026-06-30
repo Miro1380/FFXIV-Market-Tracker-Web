@@ -15,9 +15,9 @@ function NqHqGraph({ snapshots }) {
     const sorted = [...snapshots].reverse();
 
 
-    console.log('series data:', sorted.map(s => Math.round(s.avgPriceNq)));
-    console.log('series data:', sorted.map(s => Math.round(s.avgPriceHq)));
-    console.log('x data:', sorted.map(s => new Date(s.capturedAt)));
+    //console.log('series data:', sorted.map(s => Math.round(s.avgPriceNq)));
+    //console.log('series data:', sorted.map(s => Math.round(s.avgPriceHq)));
+    //console.log('x data:', sorted.map(s => new Date(s.capturedAt)));
     
     return (
         <Box>

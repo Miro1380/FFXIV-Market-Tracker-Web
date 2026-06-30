@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 function SelectedInfoCard({ item, onRefresh, onAlertCreated }) {
-    console.log("SelectedInfoCard item:", item);
+    //console.log("SelectedInfoCard item:", item);
 
     const [alertOpen, setAlertOpen] = useState(false);
 
