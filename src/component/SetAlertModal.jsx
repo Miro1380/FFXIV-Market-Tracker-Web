@@ -23,7 +23,7 @@ export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
     const [loading, setLoading] = useState(false);
     const {user} = useUser();
 
-    console.log("ITEM in Modal", item);
+    //console.log("ITEM in Modal", item);
 
     const handleSubmit = async () => {
         const price = parseFloat(targetPrice);
