@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useUser } from './component/UserContext.jsx';
 import UserLogin from './component/UserLogin.jsx'
+import { apiFetch } from "./api";
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
   //Gets initial tracked items for user 1. TODO: add user context and fetch based on logged in user.
   useEffect(() => {
 
-    fetch(`/api/tracked/user/${user.id}`)
+    apiFetch(`/api/tracked/user/${user.id}`)
       .then(res => res.json())
       .then(data => {
         //console.log('tracked items:', data);
@@ -39,7 +40,7 @@ function App() {
 
 //Fetch Alerts for items
   const fetchAlerts = () => {
-    fetch(`/api/alerts/user/${user.id}`)
+    apiFetch(`/api/alerts/user/${user.id}`)
       .then(response => response.json())
       .then(data => setAlerts(data))
       .catch((error) => console.log('fetch error in alerts', error))
@@ -50,10 +51,10 @@ function App() {
   }, [])
 
   const fetchSnapshots = (selected) => {
-    fetch(`/api/market/snapshot/${selected.itemId}/${selected.world}`,
+    apiFetch(`/api/market/snapshot/${selected.itemId}/${selected.world}`,
       { method: 'POST' }
     )
-      .then(() => fetch(`/api/market/${selected.itemId}/${selected.world}/history`))
+      .then(() => apiFetch(`/api/market/${selected.itemId}/${selected.world}/history`))
       .then(response => response.json())
       .then(data => {
         //console.log('Snapshot data', data);
@@ -67,7 +68,7 @@ function App() {
 
   //Delete alerts and update Alert state
   const handleDeleteAlert = (alertId) => {
-    fetch(`/api/alerts/${alertId}`, { method: 'DELETE' })
+    apiFetch(`/api/alerts/${alertId}`, { method: 'DELETE' })
       .then(() => fetchAlerts());
   }
 
@@ -86,7 +87,7 @@ function App() {
     setTrackedItems(prev =>
       prev.map(item =>
         item.id === id ? { ...item, isTracking: !item.isTracking } : item));
-    fetch(`/api/tracked/user/${user.id}/item/${id}`, { method: 'PATCH' });
+    apiFetch(`/api/tracked/user/${user.id}/item/${id}`, { method: 'PATCH' });
   };
 
   const handleSeed = (newItem) => {
@@ -103,7 +104,7 @@ function App() {
     setTrackedItems(prev => prev.filter(item => item.id !== id));
 
     //Removes selected item from database by id and userId. TODO: change userId to logged in user.
-    fetch(`/api/tracked/user/${user.id}/item/${id}`, { method: 'DELETE' })
+    apiFetch(`/api/tracked/user/${user.id}/item/${id}`, { method: 'DELETE' })
       .catch((error) => { console.error('Error deleting element: ', error) });
     //console.log('Deleting item with id:', id);
   }

@@ -28,6 +28,8 @@ export default function UserLogin() {
             if(!response.ok)throw new Error("Invalid Credentials");
 
             const data = await response.json();
+            // data.token is what every other call now sends; UserContext puts the
+            // whole response in localStorage, so the token rides along with it.
             setUser(data);
         } catch (error) {
             setError(error.message);

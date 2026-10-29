@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from 'react'
 import { useUser } from './UserContext';
+import { apiFetch } from "../api";
 
 //TODO:Review component.
 function SeedItem({ onSeed }) {
@@ -21,14 +22,14 @@ function SeedItem({ onSeed }) {
 
         try {
             // seed the item first
-            const itemRes = await fetch(`/api/items/seed/${seedId}`, { method: 'POST' });
+            const itemRes = await apiFetch(`/api/items/seed/${seedId}`, { method: 'POST' });
             const item = await itemRes.json();
             //console.log('item seeded:', item);
             //console.log('itemId: ', item.itemId);
 
 
             // then add it to tracked items
-            const trackedRes = await fetch('/api/tracked', {
+            const trackedRes = await apiFetch('/api/tracked', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId: user.id, itemId: item.itemId, world: user.homeWorld})

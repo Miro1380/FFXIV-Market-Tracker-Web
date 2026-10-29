@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import { useUser } from "./UserContext";
+import { apiFetch } from "../api";
 
 //Used claude from design
 export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
@@ -36,7 +37,7 @@ export default function SetAlertModal({ open, onClose, item, onAlertCreated }) {
         setError(null);
 
         try {
-            const res = await fetch("/api/alerts", {
+            const res = await apiFetch("/api/alerts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
