@@ -25,6 +25,7 @@ export default function UserLogin() {
                 body: JSON.stringify({username, password}),
             })
 
+            if (response.status === 429) throw new Error(await response.text());
             if(!response.ok)throw new Error("Invalid Credentials");
 
             const data = await response.json();
